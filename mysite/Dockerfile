@@ -11,3 +11,5 @@ RUN pip install --upgrade pip && \
 COPY nginx/nginx.conf /etc/nginx/conf.d/
 
 COPY . /app/
+
+CMD ["gunicorn", "--timeout", "120", "--workers", "3", "--bind", "0.0.0.0:8000", "mysite.wsgi:application"]
