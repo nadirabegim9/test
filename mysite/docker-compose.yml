@@ -6,9 +6,11 @@ services:
     build: .
     command: >
       bash -c "./manage.py collectstatic --noinput && ./manage.py makemigrations &&
-      ./manage.py migrate && gunicorn -b 0.0.0.0:8000 core.wsgi:application"
+      ./manage.py migrate && gunicorn -b 0.0.0.0:8000 mysite.wsgi:application"
     volumes:
       - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
     ports:
       - "8000:8000"
     depends_on:
@@ -38,4 +40,3 @@ volumes:
   postgres_data:
   static_volume:
   media_volume:
-
