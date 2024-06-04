@@ -25,7 +25,6 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
   nginx:
     build: ./nginx
     ports:
@@ -35,6 +34,8 @@ services:
       - media_volume:/app/media
     depends_on:
       - web
+    command: /bin/sh -c "sleep 10 && nginx -g 'daemon off;'"
+
 
 volumes:
   postgres_data:
